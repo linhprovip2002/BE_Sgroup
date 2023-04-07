@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const validate = require('../middleware/validate')
 
 data = [
     {
@@ -23,7 +24,7 @@ data = [
   ]
   
 
-router.get('/all', (req, res) => {
+router.get('/', (req, res) => {
   res.status(200).json(data)
 })
 // get user by id
@@ -38,7 +39,7 @@ router.get('/:id', (req, res) => {
   res.status(200).json(user)
 })
 //update user by id with data get from body
-router.put('/:id', (req, res) => {
+router.put('/:id',validate, (req, res) => {
   const id = req.params.id
   const user = data.find(user => user.id == id)
   const index = data.indexOf(user)
@@ -58,7 +59,7 @@ router.delete('/:id', (req, res) => {
 })
 //create user with data get from body
 
-router.post('/create', (req, res) => {
+router.post('/create',validate ,(req, res) => {
   const user = req.body
   console.log(user)
   data.push(user)

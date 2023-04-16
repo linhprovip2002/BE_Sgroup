@@ -2,7 +2,14 @@ const express = require('express')
 const app = express()
 const port = 3000
 const route = require('./router/index')
+const db = require('./config/db/index')
 app.use(express.json())
+// const dotenv = require('dotenv')
+// dotenv.config()
+
+// connect db
+console.log();
+db.connect;
 
 const swaggerUi = require('swagger-ui-express');
 

@@ -7,8 +7,6 @@
     "contact": {
       "email": "apiteam@swagger.io"
     },
-    "host": "localhost:8000",
-    "basePath": "/",
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -177,7 +175,195 @@
           }
         }
       }
+      
+    },
+    "/product":{
+      "get":{
+        "tags": [
+          "product"
+        ],
+        "summary": "get product all",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/product/{id}":{
+      "get":{
+        "tags": [
+          "product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "required": true
+          }
+        ],
+        "summary": "get product by id",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      },
+      "put":{
+        "tags": [
+          "product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent user in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          }
+        },
+        "summary": "update product by id",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "successful update"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      },
+      "post":{
+        "tags": [
+          "product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Create an existent user in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "#/components/schemas/product"
+              }
+            }
+          }
+        },
+        "summary": "update product by id",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "successful create"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      },
+      "delete":{
+        "tags": [
+          "product"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "delete product by id",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "successful delete"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+      },
+    "/category":
+    {
+      "get":{
+        "tags": [
+          "category"
+        ],
+        "summary": "get category all",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/category/{category_name}":
+    {
+      "get":{
+        "tags": [
+          "category"
+        ],
+        "parameters": [
+          {
+            "name": "category_name",
+            "in": "path",
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "required": true
+          }
+        ],
+        "summary": "get product by category",
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "successful operation"
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
     }
+
   },
   "components": {
     "schemas": {
@@ -205,6 +391,43 @@
         },
         "xml": {
           "name": "user"
+        }
+      },
+      "product":{
+        "type": "object",
+        "properties":
+        {
+          "item_name":{
+            "type": "string",
+            "example": "Ao khoac"
+          },
+          "quantity":{
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          },
+          "category_id":
+          {
+            "type": "integer",
+            "format": "int64",
+            "example": 10
+          }
+         
+        }
+      },
+      "Category":{
+        "type": "object",
+        "properties":
+        {
+          "id":{
+            "type": "integer",
+            "format": "int64",
+            "example": 4
+          },
+          "name":{
+            "type": "string",
+            "example": "Quan"
+          }
         }
       }
     },

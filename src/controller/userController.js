@@ -1,24 +1,37 @@
 import users from '../models/userModel.js';
-
+import NotFoundError from '../help/NotFound_Error.js';
+import ValidationError from '../help/ValidateError.js';
 
 class userController {
-    async getall(req, res) {
-        await users.getall().then
-            ((users) => {
-                res.status(200).json(users);
-            }).catch((err) => {
-                console.log("Error: ", err);
-                res.status(500).json("get all user failed");
-            });
+    async getall(req, res,next) {
+        try
+        {   
+            const all_user = await users.getall();
+            if(all_user)
+            {
+                res.status(200).json(all_user);
+            }
+            else 
+             throw new NotFoundError("get all user failed");
+        }catch(err)
+        {
+            next(err);
+        }
     }
     async getdetail(req, res) {
-        await users.getbyid(req.params.id).then
-            ((result) => {
-                res.status(200).json(result);
-            }).catch((err) => {
-                console.log("Error: ", err);
-                res.status(500).json("get user failed");
-            });
+        try
+        {
+            const user = await users.getbyid(req.params.id);
+            if(user)
+            {
+                res.status(200).json(user);
+            }
+            else 
+             throw new NotFoundError("get user failed");
+        }catch(err)
+        {
+            next(err);
+        }    
     }
     async update(req, res) {
         const id = req.params.id;
@@ -43,6 +56,8 @@ class userController {
             res.status(500).json("delete user failed");
         });
     }
+
+
 }
 
 module.exports = new userController();

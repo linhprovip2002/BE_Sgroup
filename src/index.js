@@ -3,6 +3,7 @@ import pool from './config/db'; // modify import statement
 import route from './route/index';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
+import errorHandler from './middleware/error_handling';
 const app = express();
 
 app.use(json())
@@ -23,10 +24,14 @@ connect();
 
 route(app);
 
+
+
+
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
     res.json({ status: true, message: "Our node.js app works" })
 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(errorHandler);
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

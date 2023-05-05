@@ -5,6 +5,7 @@ function route(app)
 {
     app.use('/api/users', userRoute);
     app.use('/api/auth', authRoute);
+
 }
 
 

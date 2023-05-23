@@ -1,10 +1,15 @@
-import  express  from "express";
-const route = express.Router();
+import express from 'express';
 import authController from '../controller/authController';
-import {validate_login_request,validate_register_request,validate_update_request} from '../middleware/validate_client';
+import { validateLoginRequest, validateRegisterRequest, validateEmailRequest } from '../middleware/validateClient';
 
+const route = express.Router();
 
-route.post('/register',validate_register_request , authController.register)
-route.post('/login', validate_login_request ,authController.login);
+route.post('/reset-password/:passwordResetToken', authController.resetPassword);
+
+route.post('/forgot-password/', validateEmailRequest, authController.forgotPassword);
+
+route.post('/register', validateRegisterRequest, authController.register);
+
+route.post('/login', validateLoginRequest, authController.login);
 
 module.exports = route;

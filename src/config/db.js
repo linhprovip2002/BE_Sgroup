@@ -5,9 +5,9 @@ env.config();
 
 const pool = mysql.createPool({
   host: process.env.HOST,
-  user: "root",
-  password: "",
-  database: process.env.database,
+  user: 'root',
+  password: '',
+  database: process.env.database
 });
 
 // Use promisify to wrap the pool.query method in a promise

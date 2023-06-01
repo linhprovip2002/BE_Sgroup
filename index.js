@@ -1,26 +1,41 @@
-const express = require('express')
-const app = express()
-const port = 3000
-const route = require('./router/index')
-const db = require('./config/db/index')
-app.use(express.json())
-// const dotenv = require('dotenv')
-// dotenv.config()
+import mysql2 from 'mysql2/promise';
+import dotenv from 'dotenv';
 
-// connect db
-console.log();
-db.connect;
+dotenv.config();
 
-const swaggerUi = require('swagger-ui-express');
+const pool = mysql2.createPool({
+  host: process.env.HOST,
+  user: 'root',
+  password: '',
+  database: process.env.database
+});
 
+async function getUsers () {
+  console.log('Getting all users...');
+  try {
+    const connection = await pool.getConnection();
+    const query = 'SELECT * FROM users';
+    const [rows] = await connection.query(query);
+    console.log('Users: ', rows);
+    connection.release();
+    return rows;
+  } catch (err) {
+    console.log('Error retrieving users: ', err);
+    throw err;
+  }
+}
 
+const users = {
+  getAll: async () => {
+    try {
+      const allUsers = await getUsers();
+      console.log('All users: ', allUsers);
+      return allUsers;
+    } catch (err) {
+      console.log('Error: ', err);
+      return [];
+    }
+  }
+};
 
-route(app);
-const swaggerDocument = require('./swagger.json');
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-module.exports = app
+export { users };

@@ -39,17 +39,34 @@ const userModel = function (user) {
   this.createAt = user.createAt;
 };
 
-userModel.getAll = function () {
-  return new Promise((resolve, reject) => {
-    poolKnex('users')
-      .select('*')
-      .then((users) => {
-        resolve(users);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+userModel.getAll = function (page) {
+  if (page === 1) {
+    return new Promise((resolve, reject) => {
+      poolKnex('users')
+        .select('*')
+        .then((users) => {
+          resolve(users);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  } else {
+    const limit = 2; // Number of values per page
+    const offset = (page - 1) * limit;
+    return new Promise((resolve, reject) => {
+      poolKnex('users')
+        .select('*')
+        .limit(limit)
+        .offset(offset)
+        .then((users) => {
+          resolve(users);
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
 };
 userModel.getByName = function (name) {
   return new Promise((resolve, reject) => {

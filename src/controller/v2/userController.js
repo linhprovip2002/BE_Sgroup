@@ -1,13 +1,13 @@
-import users from '../../models/v1/userModel.js';
+import userModel from '../../models/v2/knexUserModel';
 import NotFoundError from '../../help/notFoundError.js';
-import poolKnex from '../../config/knex.js';
 // import ValidationError from '../help/ValidateError.js';
 
 class userController {
   async getAll (req, res, next) {
     try {
-      console.log('get all user');
-      const allUser = await users.getall();
+      // console.log('get all user');
+      const page = req.query.page || 1;
+      const allUser = await userModel.getAll(page);
       // const allUser = await poolKnex('users').select('*');
       if (allUser) {
         return res.status(200).json(allUser);
@@ -15,16 +15,11 @@ class userController {
     } catch (err) {
       next(err);
     }
-    poolKnex('users').select('*').then((users) => {
-      return res.status(200).json(users);
-    }).catch((err) => {
-      next(err);
-    });
   }
 
   async getDetail (req, res, next) {
     try {
-      const user = await users.getById(req.params.id);
+      const user = await userModel.getById(req.params.id);
       if (user) {
         return res.status(200).json(user);
       } else { throw new NotFoundError('get user failed'); }
@@ -38,8 +33,8 @@ class userController {
     id = Number(id);
     const { name, age, gender, email } = req.body;
     // console.log(id, name, age, gender, email);
-    await users.getById(id).then((user) => {
-      users.update(id, name, age, gender, email).then((result) => {
+    await userModel.getById(id).then((user) => {
+      userModel.update(id, name, age, gender, email).then((result) => {
         return res.status(200).json('update user successfully');
       }).catch(() => {
         throw new NotFoundError('update user failed');
@@ -52,11 +47,11 @@ class userController {
   async delete (req, res, next) {
     const id = req.params.id;
     try {
-      const user = await users.getById(id);
+      const user = await userModel.getById(id);
       if (!user) {
         throw new NotFoundError('Not found user');
       } else {
-        await users.delete(id).then((result) => {
+        await userModel.delete(id).then((result) => {
           return res.status(200).json('delete user successfully');
         }).catch(() => {
           throw new NotFoundError('delete user failed');

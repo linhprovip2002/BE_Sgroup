@@ -1,13 +1,12 @@
 import users from '../../models/v1/userModel.js';
 import NotFoundError from '../../help/notFoundError.js';
-import poolKnex from '../../config/knex.js';
 // import ValidationError from '../help/ValidateError.js';
 
 class userController {
   async getAll (req, res, next) {
     try {
       console.log('get all user');
-      const allUser = await users.getall();
+      const allUser = await users.getAll();
       // const allUser = await poolKnex('users').select('*');
       if (allUser) {
         return res.status(200).json(allUser);
@@ -15,11 +14,6 @@ class userController {
     } catch (err) {
       next(err);
     }
-    poolKnex('users').select('*').then((users) => {
-      return res.status(200).json(users);
-    }).catch((err) => {
-      next(err);
-    });
   }
 
   async getDetail (req, res, next) {

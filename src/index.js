@@ -5,10 +5,23 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
 import errorHandler from './middleware/errorHandling';
 import { json } from 'body-parser';
+// import poolKnex  from './config/knex'
+// import pool from './config/db'
+
 // import { users } from '../index';
 const app = express();
 
-// connect();
+// console.log(pool);
+// pool.query('SELECT * FROM users', (err, rows) => {
+//   if (err) throw err;
+//   else console.log(rows);
+// });
+// console.log(poolKnex);
+// poolKnex('users').select('*').then((rows) => {
+//   console.log(rows);
+// }).catch((err) => {
+//   console.log(err);
+// });
 
 app.use(json())
 

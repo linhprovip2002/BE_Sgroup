@@ -1,10 +1,10 @@
 /* eslint-disable n/handle-callback-err */
-import users from '../models/userModel.js';
-import { hashPass, hashPassSalt } from '../help/hash.js';
-import { signJwt, randomToken } from '../help/signJwt.js';
-import NotFoundError from '../help/NotFound_Error.js';
-import ValidationError from '../help/ValidateError.js';
-import mailService from '../service/mail.service.js';
+import users from '../../models/v1/userModel.js';
+import { hashPass, hashPassSalt } from '../../help/hash.js';
+import { signJwt, randomToken } from '../../help/signJwt.js';
+import NotFoundError from '../../help/notFoundError.js';
+import ValidationError from '../../help/ValidateError.js';
+import mailService from '../../service/mail.service.js';
 import env from 'dotenv';
 
 env.config();
@@ -27,10 +27,12 @@ class authController {
       gender
     };
     users.create(newUser).then((user) => {
-      res.status(200).json('create user successfully');
+      users.savePasswordResetToken(email, randomToken(email));
+      users.saveResetExpire(email, Date.now() + 3600000);
+      return res.status(200).json('create user successfully');
     })
       .catch((err) => {
-        res.status(500).json('create user failed');
+        return res.status(500).json('create user failed');
       }
       );
   }
@@ -51,7 +53,7 @@ class authController {
     //     username: user.username,
     // }
     const jwt = signJwt(user);
-    res.status(200).json({ status: true, message: 'Login successfully', token: jwt });
+    return res.status(200).json({ status: true, message: 'Login successfully', token: jwt });
   }
 
   async forgotPassword (req, res, next) {
@@ -98,7 +100,7 @@ class authController {
         throw new ValidationError('Update expired failed');
       });
       const resetPassword = await users.updatePassword(user, hashPassword, salt);
-      console.log("aaaaaaaaaa" + resetPassword);
+      console.log('aaaaaa' + resetPassword);
       if (resetPassword) {
         return res.status(200).json({ status: true, message: 'Reset password successfully' });
       } else {

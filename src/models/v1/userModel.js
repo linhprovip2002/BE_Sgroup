@@ -1,4 +1,4 @@
-import pool from '../config/db';
+import pool from '../../config/db';
 
 const users = function (user) {
   this.name = user.name;
@@ -63,19 +63,21 @@ users.getById = (id) => {
     });
   });
 };
+
 users.update = (id, name, age, gender, email) => {
   return new Promise((resolve, reject) => {
-    const query = "UPDATE users SET name = ?,age = ? , gender = ? , email = ? WHERE id = ?";
+    const query = 'UPDATE users SET name = ?,age = ? , gender = ? , email = ? WHERE id = ?';
     pool.query(query, [name, age, gender, email, id], (err, user) => {
       if (err) {
         // console.log("Error: ", err);
         reject(err);
       }
-      console.log("User: ", user);
+      console.log('User', user);
       resolve(user);
     });
   });
 };
+
 users.delete = (id) => {
   return new Promise((resolve, reject) => {
     const query = 'DELETE FROM users WHERE id = ?';

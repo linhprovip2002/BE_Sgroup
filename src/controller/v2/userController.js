@@ -28,6 +28,20 @@ class userController {
     }
   }
 
+  async search (req, res, next) {
+    const {name, age, gender, email} = req.query;
+    try{
+     const searchUser = await userModel.search(name,age,gender,email);
+      if(searchUser){
+        return res.status(200).json(searchUser);
+      }else{
+        throw new NotFoundError('search user failed');
+      }
+    }catch(err){
+      next(err);
+    }
+  }   
+
   async updateById (req, res, next) {
     let id = req.params.id;
     id = Number(id);

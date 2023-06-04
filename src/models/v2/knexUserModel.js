@@ -1,3 +1,4 @@
+import { query } from 'express';
 import poolKnex from '../../config/knex';
 
 // const userModel = function (user) {
@@ -40,7 +41,8 @@ const userModel = function (user) {
 };
 
 userModel.getAll = function (page) {
-  if (page === 1) {
+  console.log(page == 1);
+  if (page == 1) {
     return new Promise((resolve, reject) => {
       poolKnex('users')
         .select('*')
@@ -194,6 +196,7 @@ userModel.saveResetExpire = function (email, expire) {
       });
   });
 };
+
 userModel.updatePassword = function (user, password, salt) {
   return new Promise((resolve, reject) => {
     poolKnex('users')
@@ -206,6 +209,32 @@ userModel.updatePassword = function (user, password, salt) {
         resolve(user);
       })
       .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+userModel.search = (name, age, gender, email) => {
+  return new Promise((resolve, reject) => {
+    let query = poolKnex('users').select('*');
+    if (name) {
+      query = query.where('name', 'like', `%${name}%`);
+    }
+    if (age) {
+      query = query.andWhere('age', 'like', `%${age}%`);
+    }
+    if (gender) {
+      query = query.andWhere('gender', 'like', `%${gender}%`);
+    }
+    if (email) {
+      query = query.andWhere('email', 'like', `%${email}%`);
+    }
+    query
+      .then((users) => {
+        resolve(users);
+      })
+      .catch((err) => {
+        console.log('Error: ', err);
         reject(err);
       });
   });

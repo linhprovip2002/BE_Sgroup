@@ -60,6 +60,19 @@ class userController {
       next(err);
     }
   }
+  async search (req, res, next) {
+    const {name, age, gender, email} = req.query;
+    try{
+     const searchUser = await users.search(name,age,gender,email);
+      if(searchUser){
+        return res.status(200).json(searchUser);
+      }else{
+        throw new NotFoundError('search user failed');
+      }
+    }catch(err){
+      next(err);
+    }
+  }   
 }
 
 // eslint-disable-next-line new-cap

@@ -152,5 +152,30 @@ users.updatePassword = (user, password, salt) => {
     });
   });
 };
+users.search = (name, age, gender, email) => {
+  return new Promise((resolve, reject) => {
+    let query = 'SELECT * FROM users WHERE ';
+    if (name) {
+      query += `name LIKE '%${name}%' `;
+    }
+    if (age) {
+      query += `AND age LIKE '%${age}%' `;
+    }
+    if (gender) {
+      query += `AND gender LIKE '%${gender}%' `;
+    }
+    if (email) {
+      query += `AND email LIKE '%${email}%' `;
+    }
+    pool.query(query, (err, users) => {
+      if (err) {
+        console.log('Error: ', err);
+        reject(err);
+      }
+      resolve(users);
+    });
+  });
+};
+
 
 module.exports = users;

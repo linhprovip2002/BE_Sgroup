@@ -108,7 +108,7 @@ userModel.getById = function (id) {
       });
   });
 };
-userModel.updateById = function (id, name, age, gender, email) {
+userModel.updateById = function (id, name, age, gender, email, updateAt) {
   return new Promise((resolve, reject) => {
     poolKnex('users')
       .where('id', id)
@@ -116,7 +116,8 @@ userModel.updateById = function (id, name, age, gender, email) {
         name,
         age,
         gender,
-        email
+        email,
+        updateAt
       })
       .then((user) => {
         resolve(user);
@@ -211,6 +212,16 @@ userModel.updatePassword = function (user, password, salt) {
       .catch((err) => {
         reject(err);
       });
+  });
+};
+
+userModel.getNameById = function (id) {
+  return new Promise((resolve, reject) => {
+    poolKnex('users').select('name').where('id', id).then((user) => {
+      resolve(user[0].name);
+    }).catch((err) => {
+      reject(err);
+    });
   });
 };
 

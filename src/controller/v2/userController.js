@@ -46,9 +46,10 @@ class userController {
     let id = req.params.id;
     id = Number(id);
     const { name, age, gender, email } = req.body;
+    const timeNow = Date.now();
     // console.log(id, name, age, gender, email);
     await userModel.getById(id).then((user) => {
-      userModel.update(id, name, age, gender, email).then((result) => {
+      userModel.update(id, name, age, gender, email, timeNow).then((result) => {
         return res.status(200).json('update user successfully');
       }).catch(() => {
         throw new NotFoundError('update user failed');

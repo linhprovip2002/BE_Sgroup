@@ -12,4 +12,7 @@ CREATE TABLE users(
     email varchar(255),
     unique(username),
  );
- 
+ CREATE TABLE formVote(
+    id int AUTO_INCREMENT PRIMARY KEY,
+    
+ )

@@ -11,18 +11,6 @@ import { json } from 'body-parser';
 // import { users } from '../index';
 const app = express();
 
-// console.log(pool);
-// pool.query('SELECT * FROM users', (err, rows) => {
-//   if (err) throw err;
-//   else console.log(rows);
-// });
-// console.log(poolKnex);
-// poolKnex('users').select('*').then((rows) => {
-//   console.log(rows);
-// }).catch((err) => {
-//   console.log(err);
-// });
-
 app.use(json())
 
 route(app);
@@ -30,7 +18,7 @@ route(app);
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
-  res.json({ status: true, message: 'Our node.js app works' })
+  res.json({ status: 200, message: 'Our node.js app works' })
 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

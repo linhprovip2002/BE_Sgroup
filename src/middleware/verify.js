@@ -43,7 +43,7 @@ module.exports = async function verify(req, res, next) {
         // console.log(token);
         if (err) {
           console.log(err);
-          return res.status(403).json('Forbidden');
+          next(err);
         } else {
           req.user = decoded;
           next();

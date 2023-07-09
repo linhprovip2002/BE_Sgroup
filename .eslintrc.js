@@ -11,7 +11,7 @@ module.exports = {
     ecmaVersion: 'latest'
   },
   rules: {
-    semi: ['error', 'always'],
-    eqeqeq: ['disabled'],
+    semi: ['error', 'always']
+    // eqeqeq: ['disabled'],
   }
 };

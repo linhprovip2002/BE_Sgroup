@@ -5,12 +5,10 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger.json';
 import errorHandler from './middleware/errorHandling';
 import { json } from 'body-parser';
-// import poolKnex  from './config/knex'
-// import pool from './config/db'
+import cors from 'cors';
 
-// import { users } from '../index';
 const app = express();
-
+app.use(cors());
 app.use(json())
 
 route(app);

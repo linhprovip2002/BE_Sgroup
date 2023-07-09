@@ -29,6 +29,7 @@ class authController {
     userModel.create(newUser).then((user) => {
       userModel.savePasswordResetToken(email, randomToken(email));
       userModel.saveResetExpire(email, Date.now() + 3600000);
+      userModel.saveCreateAt(email, new Date());
       return res.status(200).json('create user successfully');
     })
       .catch((err) => {
@@ -52,8 +53,12 @@ class authController {
     //     id: user.id,
     //     username: user.username,
     // }
-    const jwt = signJwt(user);
-    return res.status(200).json({ status: true, message: 'Login successfully', token: jwt });
+    userModel.findRole(user.id).then((roles) => {
+      // console.log(roles);
+      user.role = roles.map((role) => role.role_name);
+      const jwt = signJwt(user);
+      return res.status(200).json({ status: true, message: 'Login successfully', token: jwt });
+    });
   }
 
   async forgotPassword (req, res, next) {

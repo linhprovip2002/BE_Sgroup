@@ -1,4 +1,4 @@
-import { query } from 'express';
+// import { query } from 'express';
 import poolKnex from '../../config/knex';
 
 // const userModel = function (user) {
@@ -40,13 +40,32 @@ const userModel = function (user) {
   this.createAt = user.createAt;
 };
 
+userModel.saveCreateAt = function (email, createAt) {
+  // console.log("saveCreateAt");
+  return new Promise((resolve, reject) => {
+    poolKnex('users')
+      .where('email', email)
+      .update({
+        createdAt: createAt
+      })
+      .then((user) => {
+        resolve(user);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
 userModel.getAll = function (page) {
-  console.log(page == 1);
+  // console.log(page);
+  // eslint-disable-next-line eqeqeq
   if (page == 1) {
     return new Promise((resolve, reject) => {
       poolKnex('users')
         .select('*')
         .then((users) => {
+          console.log(users);
           resolve(users);
         })
         .catch((err) => {
@@ -91,6 +110,7 @@ userModel.create = function (newUser) {
         resolve(user);
       })
       .catch((err) => {
+        // console.log('Error: ', err);
         reject(err);
       });
   });
@@ -108,7 +128,7 @@ userModel.getById = function (id) {
       });
   });
 };
-userModel.updateById = function (id, name, age, gender, email, updateAt) {
+userModel.updateById = function (id, name, age, gender, email) {
   return new Promise((resolve, reject) => {
     poolKnex('users')
       .where('id', id)
@@ -116,8 +136,7 @@ userModel.updateById = function (id, name, age, gender, email, updateAt) {
         name,
         age,
         gender,
-        email,
-        updateAt
+        email
       })
       .then((user) => {
         resolve(user);
@@ -248,6 +267,38 @@ userModel.search = (name, age, gender, email) => {
         console.log('Error: ', err);
         reject(err);
       });
+  });
+};
+
+userModel.findRole = (id) => {
+  return new Promise((resolve, reject) => {
+    poolKnex('role')
+      .join('user_role', 'role.role_id', '=', 'user_role.role_id')
+      .join('users', 'users.id', '=', 'user_role.user_id')
+      .select('*')
+      .where('users.id', id)
+      .then((roles) => {
+        resolve(roles);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+userModel.findPermission = (role) => {
+  return new Promise((resolve, reject) => {
+    poolKnex('permissions').select('permissions.permission_name')
+      .from('permissions')
+      .join('role_permission', 'permissions.permission_id', '=', 'role_permission.permission_id')
+      .join('role', 'role.role_id', '=', 'role_permission.role_id')
+      .where('role.role_name', role).then((permissions) => {
+        // console.log(permissions);
+        resolve(permissions);
+      }
+      ).catch((err) => {
+        reject(err);
+      }
+      );
   });
 };
 

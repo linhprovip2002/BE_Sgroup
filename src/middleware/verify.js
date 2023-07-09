@@ -34,7 +34,8 @@ module.exports = async function verify(req, res, next) {
   try {
     const accessToken = req.headers.authorization;
     if (!accessToken) {
-      return res.status(403).json('Forbidden');
+      // return res.status(403).json('Forbidden');
+      throw new Error('No token provided');
     }
 
     const token = accessToken.split(' ')[1];

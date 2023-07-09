@@ -3,7 +3,8 @@ import crypto from 'crypto';
 function signJwt (user) {
   return jwt.sign({
     id: user.id,
-    username: user.username
+    username: user.username,
+    role: user.role
   }, process.env.JWT_SECRET, { expiresIn: '2h', algorithm: 'HS256' });
 }
 function randomToken (plainText) {

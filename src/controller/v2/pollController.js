@@ -15,7 +15,7 @@ class pollController {
         createAt: now,
         option: req.body.option
       });
-      console.log(newPoll);
+      // console.log(newPoll);
       pollModel.createPoll(newPoll).then((result) => {
         // console.log("dô đây");
         return res.status(200).json('create poll successfully');

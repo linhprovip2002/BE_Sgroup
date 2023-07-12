@@ -42,7 +42,7 @@ users.create = (newUser) => {
     const query = 'INSERT INTO users SET ?';
     pool.query(query, newUser, (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       // console.log("User: ", user.row[0]);
@@ -55,7 +55,7 @@ users.getById = (id) => {
     const query = 'SELECT * FROM users WHERE id = ?';
     pool.query(query, id, (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       // console.log("User: ", user);
@@ -72,7 +72,7 @@ users.update = (id, name, age, gender, email) => {
         // console.log("Error: ", err);
         reject(err);
       }
-      console.log('User', user);
+      // console.log('User', user);
       resolve(user);
     });
   });
@@ -83,7 +83,7 @@ users.delete = (id) => {
     const query = 'DELETE FROM users WHERE id = ?';
     pool.query(query, id, (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       // console.log("User: ", user);
@@ -96,7 +96,7 @@ users.getByEmail = (email) => {
     const query = 'SELECT * FROM users WHERE email = ?';
     pool.query(query, email, (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       resolve(user[0]);
@@ -108,7 +108,7 @@ users.savePasswordResetToken = (email, token) => {
     const query = 'UPDATE users SET passwordResetToken = ? WHERE email = ?';
     pool.query(query, [token, email], (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       resolve(user[0]);
@@ -120,7 +120,7 @@ users.getByPasswordResetToken = (token) => {
     const query = 'SELECT * FROM users WHERE passwordResetToken = ?';
     pool.query(query, token, (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       resolve(user[0]);
@@ -132,7 +132,7 @@ users.saveResetExpire = (email, expire) => {
     const query = 'UPDATE users SET passwordResetExpiration = ? WHERE email = ?';
     pool.query(query, [expire, email], (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       resolve(user[0]);
@@ -144,7 +144,7 @@ users.updatePassword = (user, password, salt) => {
     const query = 'UPDATE users SET password = ?,salt = ?  WHERE username = ?';
     pool.query(query, [password, salt, user.username], (err, user) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       // console.log('User: ', user[0]);
@@ -169,13 +169,12 @@ users.search = (name, age, gender, email) => {
     }
     pool.query(query, (err, users) => {
       if (err) {
-        console.log('Error: ', err);
+        // console.log('Error: ', err);
         reject(err);
       }
       resolve(users);
     });
   });
 };
-
 
 module.exports = users;

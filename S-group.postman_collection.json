@@ -1,0 +1,548 @@
+{
+	"info": {
+		"_postman_id": "cc117631-5ac2-4907-92cb-288454f9c7c4",
+		"name": "S-group",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28067830"
+	},
+	"item": [
+		{
+			"name": "Register account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"linh1\",\r\n    \"password\":\"linh1password\",\r\n    \"age\":22,\r\n    \"name\":\"Đặng Quang Nhật Linh2\",\r\n    \"gender\":false,\r\n    \"email\":\"nhatlinh.dut.2@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with account",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"linh\",\r\n    \"password\":\"linhpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "request get token password ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"nhatlinh.dut.1@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/auth/forgot-password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"auth",
+						"forgot-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reset password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\":\"linhpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/auth/reset-password/39fcb2167a9851d6e2c48ec5fd31819130b073c444b8db645e5f1d057a14ec6b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"auth",
+						"reset-password",
+						"39fcb2167a9851d6e2c48ec5fd31819130b073c444b8db645e5f1d057a14ec6b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search with one of four  condition ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/users/search?name=linh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"search"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "linh"
+						},
+						{
+							"key": "age ",
+							"value": "21",
+							"disabled": true
+						},
+						{
+							"key": "gender",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "detail user ",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwicm9sZSI6WyJBZG1pbiIsIk1vZGVyYXRvciAiLCJVc2VyIl0sImlhdCI6MTY4ODkxMDA5NSwiZXhwIjoxNjg4OTE3Mjk1fQ.996Ui79NB4QsGfvYk-DXWDzYkMerPiWHGiDCyOOd8JU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/users/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update use by id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"linh vua update\",\r\n    \"age\":21,\r\n    \"gender\": false,\r\n    \"email\":\"nhatlinh.dut.1@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/users/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"users",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create poll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Khảo sát đi chơi part2 \",\r\n    \"question\":\"Thứ 2 tuần này đi chơi chứ\",\r\n    \"option\":[\r\n        \"có1\",\r\n        \"không1\",\r\n        \"hên xui bạn1 \"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all polls",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get detail poll",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update poll",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"update cái poll\",\r\n    \"question\":\"oke oke oke\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete poll",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert option for poll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"option\":\"them option ne\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls/1/option",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls",
+						"1",
+						"option"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove option ",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls/6/option",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls",
+						"6",
+						"option"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vote option",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls/2/vote/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls",
+						"2",
+						"vote",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unvote option",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywidXNlcm5hbWUiOiJsaW5oIiwiaWF0IjoxNjg3MjYwNjA0LCJleHAiOjE2ODcyNjc4MDR9.-J-49-0jL3UilloNnWtOpvR-bN9LZ_PBamA3zcS1FME",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/v2/polls/2/vote/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v2",
+						"polls",
+						"2",
+						"vote",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

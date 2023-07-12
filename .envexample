@@ -1,0 +1,14 @@
+HOST = localhost
+database = `Your database`
+JWT_SECRET = `Secret key you want`
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER= `Your email or mail public`
+SMTP_PASS=`step1: entering https://myaccount.google.com/security 
+step2:Turn on 2-Step Verification in security
+step3: Drag down to bottom of page then click on App passwords
+step4 choose general
+`
+CLIENT_URL= `http://localhost:3000`
+REDIS_URL = `your redis url`
+

@@ -12,10 +12,10 @@ class userController {
       CacheService.get('users', 888).then((result) => {
         // console.log(result);
         if (result != null) {
-          console.log('get from cache');
+          // console.log('get from cache');
           return res.status(200).json(result);
         } else {
-          console.log('get from db');
+          // console.log('get from db');
           userModel.getAll(page).then((result) => {
             CacheService.set('users', 888, result);
             return res.status(200).json(result);

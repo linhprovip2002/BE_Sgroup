@@ -61,7 +61,7 @@ class authController {
     try {
       const { email } = req.body;
       const user = await users.getByEmail(email);
-      console.log(user);
+      // console.log(user);
       if (user) {
         const htmlTemplate = `
                     <h1>Reset password</h1>
@@ -89,7 +89,7 @@ class authController {
       const passwordResetToken = req.params.passwordResetToken;
       const { password } = req.body;
       const { salt, hashPassword } = hashPass(password);
-      console.log(salt, hashPassword);
+      // console.log(salt, hashPassword);
       const user = await users.getByPasswordResetToken(passwordResetToken);
       const token = randomToken(user.email);
       users.savePasswordResetToken(user.email, token).catch((err) => {
@@ -100,7 +100,7 @@ class authController {
         throw new ValidationError('Update expired failed');
       });
       const resetPassword = await users.updatePassword(user, hashPassword, salt);
-      console.log('aaaaaa' + resetPassword);
+      // console.log('aaaaaa' + resetPassword);
       if (resetPassword) {
         return res.status(200).json({ status: true, message: 'Reset password successfully' });
       } else {
